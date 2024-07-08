@@ -1,0 +1,61 @@
+package mainhttps://github.com/ArchitectMX/automatic-dollop/tree/main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+func isDate(date string) bool {
+	for _, symbol := range date {
+		if !strings.Contains("0123456789.", string(symbol)) {
+			return false
+		}
+	}
+	return true
+}
+
+func isFormattedDate(date string) bool {
+	if date == "1" || date == "2" || strings.ToLower(date) == "american" || strings.ToLower(date) == "european" {
+		return true
+	}
+	return false
+}
+
+func main() {
+	var date string
+	var format string
+	fmt.Println("Choose a format of date:\nAmerican or European\nYou may choose 1 or 2")
+	fmt.Scanln(&format)
+	if !isFormattedDate(format) {
+		fmt.Println("Uncorrected format of date.")
+		main()
+	}
+	fmt.Println("Enter date of birth:")
+	fmt.Scanln(&date)
+	for _, symbol := range date {
+		if !strings.Contains("0123456789.", string(symbol)) {
+			fmt.Println("Uncorrected format of date.")
+			main()
+		}
+	}
+	if len(strings.Split(date, ".")) != 3 {
+		fmt.Println("Wrong date format.")
+		main()
+	}
+	var year int
+	var month string
+	var day string
+	if format == "1" || strings.ToLower(date) == "american" {
+		year, _ = strconv.Atoi(strings.Split(date, ".")[2])
+		month = strings.Split(date, ".")[0]
+		day = strings.Split(date, ".")[1]
+	} else if format == "2" || strings.ToLower(date) == "european" {
+		year, _ = strconv.Atoi(strings.Split(date, ".")[2])
+		month = strings.Split(date, ".")[1]
+		day = strings.Split(date, ".")[0]
+	}
+	if strings.Contains("01,03,05,07,08,10,12", month) && day == "31" || strings.Contains("04,06,09,11", month) && day == "30" || month == "02" && (day == "28" || day == "29") {
+		today := 
+	}
+}
