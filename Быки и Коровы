@@ -1,0 +1,66 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"strconv"
+	"strings"
+)
+
+func test() {
+
+}
+
+func main() {
+	fmt.Println("Добро пожаловать в игру \"Быки и коровы\"!\nПопробуйте угадать четырехзначное число.")
+	numb := rand.Intn(8888) + 1111
+	numbstr := strconv.Itoa(numb)
+
+	attempt := 0
+	for {
+		cheat := make(map[int]int)
+		for i := 0; i < 4; i++ {
+			cheat[i] = 0
+		}
+		var try string
+		for {
+			fmt.Println("Введите вашу догадку (четырехзначное число):")
+			fmt.Scanln(&try)
+			cheat1 := 0
+			for ind := range try {
+				if !strings.Contains("1234567890", string(try[ind])) {
+					cheat1 += 1
+				}
+			}
+			if len(try) > 4 || len(try) < 4 {
+				cheat1 += 1
+			}
+			if cheat1 == 0 {
+				break
+			}
+			fmt.Println("Not a number or it is to big or small")
+		}
+		var redbull, bluecow = 0, 0
+		attempt += 1
+		for ind := range 4 {
+			if numbstr[ind] == try[ind] {
+				redbull += 1
+				cheat[ind] += 1
+			} else if strings.Contains(try, string(numbstr[ind])) {
+				for ind2 := range 4 {
+					if try[ind2] == numbstr[ind] && cheat[ind2] == 0 {
+						bluecow += 1
+						cheat[ind2] += 1
+						break
+					}
+				}
+			}
+		}
+		if redbull == 4 {
+			fmt.Printf("Поздравляем! Вы угадали число "+numbstr+" за %d попыток.\n", attempt)
+			return
+		} else {
+			fmt.Printf("Попытка %d: ваше число - "+try+", быки: %d, коровы: %d\n", attempt, redbull, bluecow)
+		}
+	}
+}
