@@ -18,7 +18,7 @@ func main() {
 		}
 		var try string
 		for {
-			fmt.Println("Введите вашу догадку (четырехзначное число, не меньше 1111):")
+			fmt.Println("Введите вашу догадку (четырехзначное число):")
 			fmt.Scanln(&try)
 			errorCount := 0
 			for ind := range try {
