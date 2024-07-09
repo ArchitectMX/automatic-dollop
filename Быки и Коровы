@@ -9,7 +9,7 @@ import (
 
 func main() {
 	fmt.Println("Добро пожаловать в игру \"Быки и коровы\"!\nПопробуйте угадать четырехзначное число.")
-	numb := strconv.Itoa(rand.Intn(8888) + 1111)
+	numb := strconv.Itoa(rand.Intn(9000) + 1000)
 	attempt := 0
 	for {
 		countNumbersUsed := make(map[int]int)
