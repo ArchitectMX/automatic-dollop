@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Магазин</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            background: #0088cc;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Привет, <span id="username">гость</span>!</h1>
+    <button onclick="Telegram.WebApp.close()">Закрыть</button>
+</div>
+
+<script>
+    Telegram.WebApp.expand();
+    fetch(`/api/user?initData=${Telegram.WebApp.initData}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("username").innerText = data.username || "гость";
+        });
+</script>
+</body>
+</html>
