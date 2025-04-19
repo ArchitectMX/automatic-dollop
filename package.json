@@ -1,0 +1,12 @@
+{
+  "name": "telegram-mini-app",
+  "version": "1.0.0",
+  "main": "main.go",
+  "scripts": {
+    "start": "sh run.sh"
+  },
+  "dependencies": {},
+  "engines": {
+    "go": "1.17"
+  }
+}
